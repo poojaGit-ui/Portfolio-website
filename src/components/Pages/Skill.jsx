@@ -16,8 +16,8 @@ export const Skill = () => {
   return (
     <>
       <div
-        className="skill-div w-full h-full flex  items-center gap-20 flex-col
-      bg-indigo-50 flex-wrap  "
+        className="skill-div w-full h-full flex  items-center  gap-20 flex-col
+      bg-indigo-50 flex-wrap mb-5 pb-15 "
       >
         <div className="heading-div text-center mt-10 ">
           <h1 className="text-4xl font-medium ">Skills & Tools I Use</h1>
@@ -91,23 +91,26 @@ export const Skill = () => {
         <div>
           <h1 className="font-semibold text-lg">Expertise Level</h1>
         </div>
-        {skills.map((skill, index) => (
-          <div className="Expertis-div w-[480px] flex  gap-10  flex-wrap ">
-            <div key={index} className="level-1 flex gap-2 flex-col">
-              <div className="flex justify-between">
+  <div className="grid grid-cols-2 gap-10">
+                {skills.map((skill, index) => (
+                  <div className="Expertis-div w-[480px] flex justify-between  ">
+                  <div key={index} className="level-1 flex gap-2 flex-col">
+                   <div className="flex justify-between">
                 <p>{skill.name}</p>
                 <p className="text-indigo-500">{skill.level * 100}%</p>
-              </div>
+                      </div>
+                      
               <div className="level-container  ">
                 <div
-                  className="  skill-level bg-indigo-700 origin-left transition-transform duration-3 000 ease-out"
+                  className="  skill-level bg-indigo-700 origin-left transition-transform duration-3000 ease-out"
                   style={{ transform: `scaleX(${progress[index]})` }}
                 ></div>
               </div>
               
             </div>
-          </div>
+    </div>
         ))}
+  </div>
       </div>
     </>
   );
