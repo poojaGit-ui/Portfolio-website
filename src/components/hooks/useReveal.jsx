@@ -1,24 +1,36 @@
 import React, { useEffect, useRef } from 'react'
 
-export const useReveal = (animationClass) => {
+
+
+
+export const useReveal = () => {
 
     
-    const ref = useRef(null);
+    const containerRef  = useRef(null);
 
     useEffect(() => {
-        // const elements = document.querySelectorAll(".reveal");
+        if (!containerRef.current) return;
+         const elements = containerRef.current.querySelectorAll(".reveal");
 
-        const observer = new IntersectionObserver(([entry], observer) => {
-            if (entry.isIntersecting) {
-                entry.target.classList.add(animationClass);
-                observer.unobserve(entry.target);
-            }
-        });
-        if (ref.current) observer.observe(ref.current);
-        return () => observer.disconnect();
-    }, [animationClass])
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach((entry) => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add("animate");
+                    observer.unobserve(entry.target);
+                }
+            });
+           
+        },
+        { threshold: 0.2 } // trigger when 20% visible
+        );
 
-      return ref;
+        elements.forEach((el) => observer.observe(el));
+        return () => {
+            elements.forEach((el) => observer.unobserve(el));
+        };
+    }, []);
+
+      return containerRef;
 // return (
 //     <div>useReveal</div>
 //   )
