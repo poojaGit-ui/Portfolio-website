@@ -6,7 +6,8 @@ import React, { useEffect, useRef } from 'react'
 export const useReveal = () => {
 
     
-    const containerRef  = useRef(null);
+    const containerRef = useRef(null);
+    
 
     useEffect(() => {
         if (!containerRef.current) return;
